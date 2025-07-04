@@ -1,24 +1,13 @@
-document.getElementById('signinForm').addEventListener('submit', async function(e) {
+document.getElementById('signinForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
   const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
+  const password = document.getElementById('password').value.trim();
 
-  const response = await fetch('http://localhost:3000/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email, password })
-  });
-
-  const data = await response.json();
-
-  if (response.ok) {
-    alert('Login successful!');
-    // Redirect to homepage or dashboard
-    window.location.href = 'index.html';
+  if (email && password) {
+    alert('Signed in successfully!');
+    window.location.href = 'index.html'; // redirect to homepage
   } else {
-    document.getElementById('error-message').innerText = data.message || 'Login failed.';
+    document.getElementById('error-message').textContent = 'Please enter email and password.';
   }
 });
